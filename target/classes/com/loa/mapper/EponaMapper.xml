@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.EponaMapper">
+	
+	<select id="listAll" resultType="com.loa.model.EponaDTO">
+		select * from epona order by charic asc, (sumpoint-currpoint) desc
+	</select>
+	
+	<select id="info" resultType="com.loa.model.EponaDTO">
+		select * from epona where name=#{name}
+	</select>
+	
+	<update id="update">
+		update epona set currPoint=#{currPoint}, charic=#{charic} where name=#{name}
+	</update>
+	
+</mapper>
+
+
+	

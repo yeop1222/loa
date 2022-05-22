@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.IslandMapper">
+	
+	<select id="listAll" resultType="com.loa.model.IslandDTO">
+		select * from island order by isGot asc, percent desc
+	</select>
+	
+	<select id="countGot" resultType="int">
+		select count(*) from island where isGot=1 
+	</select>
+	
+	<select id="info" resultType="com.loa.model.IslandDTO">
+		select * from island where num=#{num}
+	</select>
+	
+	<update id="update">
+		update island set isGot=#{isGot} where num=#{num}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+	
