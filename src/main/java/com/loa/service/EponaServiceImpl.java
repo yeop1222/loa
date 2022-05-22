@@ -16,7 +16,9 @@ public class EponaServiceImpl implements EponaService{
 
 	@Override
 	public List<EponaDTO> listAll() {
-		return mapper.listAll();
+		List<EponaDTO> list = mapper.listHasChar();
+		list.addAll(mapper.listHasntChar());
+		return list;
 	}
 
 	@Override

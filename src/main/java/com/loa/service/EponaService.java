@@ -6,8 +6,7 @@ import com.loa.model.EponaDTO;
 
 public interface EponaService {
 	
-	//에포나 전체 데이터 불러옴..
-	//TODO charic orders 순서대로 정렬할 방법 찾아보기
+	//에포나 전체 데이터 불러옴
 	public List<EponaDTO> listAll();
 	
 	//해당 에포나 정보 불러옴

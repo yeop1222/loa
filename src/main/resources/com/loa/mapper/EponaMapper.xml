@@ -5,8 +5,16 @@
   
 <mapper namespace="com.loa.mapper.EponaMapper">
 	
-	<select id="listAll" resultType="com.loa.model.EponaDTO">
-		select * from epona order by charic asc, (sumpoint-currpoint) desc
+	<select id="listHasChar" resultType="com.loa.model.EponaDTO">
+		select * from epona e, charic c
+			where e.charic = c.name
+			order by c.orders asc, e.sumpoint-e.currpoint desc
+	</select>
+	
+	<select id="listHasntChar" resultType="com.loa.model.EponaDTO">
+		select * from epona
+			where charic is null
+			order by sumpoint-currpoint desc
 	</select>
 	
 	<select id="info" resultType="com.loa.model.EponaDTO">
