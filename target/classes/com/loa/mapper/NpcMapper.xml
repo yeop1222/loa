@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.NpcMapper">
+
+	<select id="getSongScore" resultType="int">
+		select nvl(score,0) from song where name=#{name}
+	</select>
+	<select id="getEmoteScore" resultType="int">
+		select nvl(score,0) from emote where name=#{name}
+	</select>
+
+	<select id="getReward" resultType="com.loa.model.NpcRewardDTO">
+		select * from npcreward where name=#{name}
+	</select>
+
+	<select id="listAll" resultType="com.loa.model.NpcDTO" parameterType="String">
+		select * from npc, npcreward where npc.name=npcreward.name
+		<choose>
+			<when test="filter==0">
+			
+			</when>
+			<when test="filter==1">
+				order by tier asc 
+			</when>
+			<when test="filter==2">
+				order by location
+			</when>
+			<when test="filter==3">
+				and (reward1 like '%거인%'
+				or reward2 like '%거인%'
+				or reward3 like '%거인%'
+				or reward4 like '%거인%'
+				or reward5 like '%거인%')
+			</when>
+			<when test="filter==4">
+				and (reward1 like '%오르페우스%'
+				or reward2 like '%오르페우스%'
+				or reward3 like '%오르페우스%'
+				or reward4 like '%오르페우스%'
+				or reward5 like '%오르페우스%')
+			</when>
+			<when test="filter==5">
+				and (reward1 like '%미술품%'
+				or reward2 like '%미술품%'
+				or reward3 like '%미술품%'
+				or reward4 like '%미술품%'
+				or reward5 like '%미술품%')
+			</when>
+			<when test="filter==6">
+				and (reward1 like '%섬의%'
+				or reward2 like '%섬의%'
+				or reward3 like '%섬의%'
+				or reward4 like '%섬의%'
+				or reward5 like '%섬의%')
+			</when>
+			<when test="filter==7">
+				and (reward1 like '%지도%'
+				or reward2 like '%지도%'
+				or reward3 like '%지도%'
+				or reward4 like '%지도%'
+				or reward5 like '%지도%')
+			</when>
+			<otherwise>
+				and (reward1 like '%${search}%'
+				or reward2 like '%${search}%'
+				or reward3 like '%${search}%'
+				or reward4 like '%${search}%'
+				or reward5 like '%${search}%')
+			</otherwise>
+		</choose>
+	</select>
+</mapper>
