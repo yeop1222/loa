@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.CharDailyMapper">
+	
+	<select id="getCharDaily" resultType="com.loa.model.CharDailyDTO">
+		select * from char_daily where name=#{name}
+	</select>
+	
+	<update id="eponaUpdate" parameterType="com.loa.model.CharDailyDTO">
+		update epona set currpoint=currpoint+1
+			<where>
+				name in (
+					<if test="eponav1 == 1">#{epona1},</if>
+					<if test="eponav2 == 1">#{epona2},</if>
+					<if test="eponav3 == 1">#{epona3},</if>
+					''
+				)
+			</where>
+	</update>
+	
+	<select id="getRest" resultType="com.loa.model.RestDTO">
+		select restChaos, restGuardian, restEpona from charic where name=#{name}
+	</select>
+	
+	<update id="initZero">
+		update char_daily set
+			reg=sysdate,
+			chaos=0,
+			guardian=0,
+			eponav1=0,
+			eponav2=0,
+			eponav3=0,
+			guild=0
+			where name=#{name}
+	</update>
+	
+	<update id="cRestUpdate" >
+		update charic set
+			restChaos=#{restChaos},
+			restGuardian=#{restGuardian},
+			restEpona=#{restEpona}
+			where name=#{name}
+	</update>
+	
+	<select id="info" resultType="com.loa.model.CharDailyDTO">
+		select * from char_daily where name=#{name}
+	</select>
+	
+	<update id="update">
+		update char_daily set
+			reg=sysdate,
+			chaos=#{chaos},
+			guardian=#{guardian},
+			eponav1=#{eponav1},
+			eponav2=#{eponav2},
+			eponav3=#{eponav3},
+			guild=#{guild}
+			where name=#{name}
+	</update>
+	
+	<select id="showAdd" resultType="int">
+		select count(*) from char_daily
+			where name=#{charName} and (
+				(epona1=#{eponaName} and eponav1=1)
+				or (epona2=#{eponaName} and eponav2=1)
+				or (epona3=#{eponaName} and eponav3=1)
+			)
+	</select>
+</mapper>
+
+
+	

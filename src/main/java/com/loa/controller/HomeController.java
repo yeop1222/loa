@@ -1,32 +1,39 @@
 package com.loa.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.loa.service.CharService;
 
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	@Autowired
+	private CharService cs;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	@RequestMapping("/")
+	public String home(String wonOpt, String charOpt, String charOpt2, Model model) {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		//페이지탭 옵션
+		if(wonOpt==null) {
+			wonOpt="0";
+		}
+		if(charOpt==null) {
+			charOpt="1";
+		}
+		if(charOpt2==null) {
+			charOpt2="1";
+		}
+		model.addAttribute("wonOpt", wonOpt);
+		model.addAttribute("charOpt", charOpt);
+		model.addAttribute("charOpt2", charOpt2);
 		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+		//캐릭터 리스트
+		model.addAttribute("charList", cs.charList());
 		
 		return "home";
 	}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.CharMapper">
+	
+	<update id="update">
+		update charic 
+			<set>
+				<if test="lev != 0">lev=#{lev},</if>
+				<if test="classs != null">classs=#{classs},</if>
+				<if test="orders != 0">orders=#{orders},</if>
+				<if test="restChaos != 0">restChaos=#{restChaos},</if>
+				<if test="restGuardian != 0">restGuardian=#{restGuardian},</if>
+				<if test="restEpona != 0">restEpona=#{restEpona}</if>
+			</set>
+		where name=#{name}
+	</update>
+	
+	<select id="info" resultType="com.loa.model.CharDTO">
+		select * from charic where name=#{name}
+	</select>
+	
+	<delete id="delete">
+		delete from charic where name=#{name}
+	</delete>
+	
+	<select id="charList" resultType="com.loa.model.CharDTO">
+		select * from charic order by orders asc
+	</select>
+	
+	<insert id="addChar">
+		insert into charic values(#{name},#{lev},#{classs},
+			(select max(orders)+1 from charic),
+			0,0,0)
+	</insert>
+</mapper>
+
+
+	
