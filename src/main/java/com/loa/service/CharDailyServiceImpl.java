@@ -84,7 +84,12 @@ public class CharDailyServiceImpl implements CharDailyService {
 			dto.setGuild(0);
 			mapper.initZero(charName);
 			mapper.cRestUpdate(restDTO.getRestChaos(), restDTO.getRestGuardian(), restDTO.getRestEpona(), charName);
+			
+
+			System.out.println(dto);
+			System.out.println(restDTO);
 		}
+		
 		
 		return dto;
 	}

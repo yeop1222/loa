@@ -16,4 +16,6 @@ public interface CharService {
 	public CharDTO info(String name);
 	//캐릭 정보 수정
 	public int update(CharDTO dto);
+	//캐릭터 이름만 리스트로 불러오기
+	public List<String> charNameList();
 }

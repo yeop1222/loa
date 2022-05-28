@@ -30,4 +30,16 @@ public class EponaServiceImpl implements EponaService{
 	public int update(EponaDTO dto) {
 		return mapper.update(dto);
 	}
+	
+	@Override
+	public void dailyUpdate(List<String> charList) {
+		
+		for(String charic : charList) {
+			List<String> list = mapper.charEponaList(charic);
+			while(list.size() < 3) {
+				list.add("");
+			}
+			mapper.updateCharEpona(list.get(0),list.get(1),list.get(2),charic);	
+		}
+	}
 }

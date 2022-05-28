@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.loa.model.CharDailyDTO;
 import com.loa.service.CharDailyService;
 import com.loa.service.CharService;
+import com.loa.service.EponaService;
 
 @Controller
 @RequestMapping("/content/*")
@@ -17,6 +18,8 @@ public class ContentController {
 	private CharDailyService cds;
 	@Autowired
 	private CharService cs;
+	@Autowired
+	private EponaService es;
 	
 	@RequestMapping("/charDaily")
 	public String charDaily(String wonOpt, String charOpt2, String name, Model model) {
@@ -35,6 +38,21 @@ public class ContentController {
 		//charDTO contentDTO
 		model.addAttribute("ch", cs.info(name));
 		model.addAttribute("co", cds.info(name));
+		
+		//에포나 완성되었으면 빨간색으로 표시해줄거임
+		if(es.info(cds.info(name).getEpona1()).getCurrPoint() 
+				== es.info(cds.info(name).getEpona1()).getSumPoint()) {
+			model.addAttribute("e1", 1);
+		}
+		if(es.info(cds.info(name).getEpona2()).getCurrPoint() 
+				== es.info(cds.info(name).getEpona2()).getSumPoint()) {
+			model.addAttribute("e2", 1);
+		}
+		if(es.info(cds.info(name).getEpona3()).getCurrPoint() 
+				== es.info(cds.info(name).getEpona3()).getSumPoint()) {
+			model.addAttribute("e3", 1);
+		}
+		
 		return "content/charDaily";
 	}
 	
@@ -50,7 +68,6 @@ public class ContentController {
 		
 		dto.setChaos(Integer.parseInt(chaos1)+Integer.parseInt(chaos2));
 		dto.setGuardian(Integer.parseInt(guardian1)+Integer.parseInt(guardian2));
-		System.out.println(dto);
 		
 		cds.update(dto);
 		

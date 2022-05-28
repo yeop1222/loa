@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.loa.model.CharDailyDTO;
 import com.loa.model.EponaDTO;
 import com.loa.service.CharDailyService;
+import com.loa.service.CharService;
 import com.loa.service.EponaService;
 
 @Controller
@@ -22,6 +24,8 @@ public class EponaController {
 	private EponaService service;
 	@Autowired
 	private CharDailyService cds;
+	@Autowired
+	private CharService cs;
 	
 	@RequestMapping("epona/")
 	public String list(Model model) {
@@ -38,7 +42,21 @@ public class EponaController {
 
 	@RequestMapping("epona/updateForm")
 	public String updateForm(String name, Model model) {
-		model.addAttribute("dto", service.info(name));
+		
+		EponaDTO dto = service.info(name);
+		
+		for(String charic : cs.charNameList()) {
+		
+			CharDailyDTO cdto = cds.info(charic);
+		
+			//TODO 조건은 char_daily eponav1~3값 모두 off일때만 가능
+			if(cdto.getEponav1() + cdto.getEponav2() + cdto.getEponav3() > 0 ) {
+				model.addAttribute("error", true );
+			}
+		}
+		
+		model.addAttribute("dto", dto);
+		
 		return "epona/updateForm";
 	}
 	
@@ -47,9 +65,9 @@ public class EponaController {
 		String str = "에포나 진행도 수정 실패";
 		if(service.update(dto) == 1) {
 			str = "에포나 진행도 수정 완료";
+			service.dailyUpdate(cs.charNameList());
 		}
 		//TODO 수정시 char_daily 테이블에도 수정할것
-		//TODO 조건은 char_daily eponav1~3값 모두 off일때만 가능
 		model.addAttribute("result", str);
 		return "epona/updatePro";
 	}

@@ -14,4 +14,7 @@ public interface EponaService {
 	
 	//에포나 정보 수정(횟수랑 캐릭만 수정가능)
 	public int update(EponaDTO dto);
+	
+	//에포나 정보 수정시 daily content테이블도 수정
+	public void dailyUpdate(List<String> charList);
 }

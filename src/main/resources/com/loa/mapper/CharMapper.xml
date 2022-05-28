@@ -35,6 +35,10 @@
 			(select max(orders)+1 from charic),
 			0,0,0)
 	</insert>
+	
+	<select id="charNameList" resultType="String">
+		select name from charic
+	</select>
 </mapper>
 
 

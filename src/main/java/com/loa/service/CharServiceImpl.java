@@ -39,4 +39,8 @@ public class CharServiceImpl implements CharService{
 		return mapper.update(dto);
 	}
 	
+	@Override
+	public List<String> charNameList(){
+		return mapper.charNameList();
+	}
 }

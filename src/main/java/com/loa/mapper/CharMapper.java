@@ -13,4 +13,5 @@ public interface CharMapper {
 	public int delete(String name);
 	public CharDTO info(String name);
 	public int update(CharDTO dto);
+	public List<String> charNameList();
 }

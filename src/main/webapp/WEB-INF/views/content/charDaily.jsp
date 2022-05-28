@@ -65,7 +65,7 @@
 			</th>
 			<td colspan="6" class="align-middle">
 				<div class="form-check">
-					<label class="form-check-label">
+					<label class="form-check-label" style="color:${e1==1?'red':''}" >
 						<input type="checkbox" class="form-check-input" name="eponav1" value="1" /> 
 						${co.epona1}&nbsp;
 					</label>
@@ -75,7 +75,7 @@
 		<tr >
 			<td colspan="6" class="align-middle">
 				<div class="form-check">
-					<label class="form-check-label">
+					<label class="form-check-label" style="color:${e2==1?'red':''}">
 						<input type="checkbox" class="form-check-input" name="eponav2" value="1" /> 
 						${co.epona2}&nbsp;
 					</label>
@@ -85,7 +85,7 @@
 		<tr >
 			<td colspan="6" class="align-middle">
 				<div class="form-check">
-					<label class="form-check-label">
+					<label class="form-check-label" style="color:${e3==1?'red':''}">
 						<input type="checkbox" class="form-check-input" name="eponav3" value="1" /> 
 						${co.epona3}&nbsp;
 					</label>

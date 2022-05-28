@@ -25,6 +25,18 @@
 		update epona set currPoint=#{currPoint}, charic=#{charic} where name=#{name}
 	</update>
 	
+	<select id="charEponaList" resultType="String">
+		select name from epona where charic=#{charName}
+	</select>
+	
+	<update id="updateCharEpona" parameterType="String">
+		update char_daily set
+			epona1 = #{epona1},
+			epona2 = #{epona2},
+			epona3 = #{epona3}
+			where name=#{charic}
+	</update>
+	
 </mapper>
 
 
