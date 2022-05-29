@@ -24,10 +24,10 @@
 		<li class="nav-item ">
 			<a class="nav-link" href="/epona/">에포나 관리</a>
 		</li>
-		<li class="nav-item">
+		<li class="nav-item active">
 			<a class="nav-link" href="#">호감도</a>
 		</li>
-		<li class="nav-item active">
+		<li class="nav-item ">
 			<a class="nav-link" href="/island/">섬의마음</a>
 		</li>
 	</ul>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.WonDailyMapper">
+	<select id="getWonDaily" resultType="com.loa.model.WonDailyDTO">
+		select * from won_daily
+	</select>
+	
+	<update id="npcUpdate">
+		update npc set currscore=currscore
+			<if test="value &amp; 0x8 != 0">
+				+(select score from song where name=
+				(select song1 from npc where name=#{npcName}))
+			</if>
+			<if test="value &amp; 0x4 != 0">
+				+(select score from song where name=
+				(select song2 from npc where name=#{npcName}))
+			</if>
+			<if test="value &amp; 0x2 != 0">
+				+(select emote from song where name=
+				(select emote1 from npc where name=#{npcName}))
+			</if>
+			<if test="value &amp; 0x1 != 0">
+				+(select emote from song where name=
+				(select emote2 from npc where name=#{npcName}))
+			</if>
+		where name=#{npcName}
+	</update>
+
+	<update id="initDayZero">
+		update won_daily set 
+			island = 0,
+			bitan=0,
+			chaosGate=0,
+			boss=0,
+			pkIsland=0,
+			npcValue=0
+	</update>
+	
+	<update id="initWeekZero">
+		update won_daily set
+			ghostShip=0,
+			rowen=0,
+			thulubik=0
+	</update>
+	
+	<select id="npcList" resultType="com.loa.model.NpcDTO">
+		select * from npc where sedo>0
+	</select>
+	
+</mapper>
+
+
+	

@@ -1,14 +1,20 @@
 package com.loa.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.loa.model.CharDailyDTO;
+import com.loa.model.NpcDTO;
+import com.loa.model.WonDailyDTO;
 import com.loa.service.CharDailyService;
 import com.loa.service.CharService;
 import com.loa.service.EponaService;
+import com.loa.service.WonDailyService;
 
 @Controller
 @RequestMapping("/content/*")
@@ -20,6 +26,8 @@ public class ContentController {
 	private CharService cs;
 	@Autowired
 	private EponaService es;
+	@Autowired
+	private WonDailyService wds;
 	
 	@RequestMapping("/charDaily")
 	public String charDaily(String wonOpt, String charOpt2, String name, Model model) {
@@ -83,5 +91,53 @@ public class ContentController {
 		model.addAttribute("charOpt", cs.info(dto.getName()).getOrders());
 		
 		return "content/charDailyPro";
+	}
+
+	@RequestMapping("charWeekly")
+	public String charWeekly(Model model, String name2) {
+		model.addAttribute("name", name2);
+		return "content/charWeekly";
+	}
+	@RequestMapping("charWeeklyPro")
+	public String charWeeklyPro() {
+		return "content/charWeeklyPro";
+	}
+	@RequestMapping("wonDaily")
+	public String wonDaily(Model model, String charOpt, String charOpt2) {
+		//페이지탭 옵션
+		if(charOpt==null) {
+			charOpt="1";
+		}
+		if(charOpt2==null) {
+			charOpt2="1";
+		}
+		model.addAttribute("charOpt", charOpt);
+		model.addAttribute("charOpt2", charOpt2);
+		
+		//초기화
+		wds.init();
+		//dto보내기
+		model.addAttribute("co", wds.info());
+		//요일정보 보내기
+		model.addAttribute("day", new Date().getDay());
+		//npc리스트 보내기
+		model.addAttribute("npcList", wds.npcList());
+		
+		return "content/wonDaily";
+	}
+	@RequestMapping("wonDailyPro")
+	public String wonDailyPro(Model model, WonDailyDTO dto) {
+		
+		model.addAttribute("dto", dto);
+		
+		return "content/wonDailyPro";
+	}
+	@RequestMapping("wonWeekly")
+	public String wonWeekly() {
+		return "content/wonWeekly";
+	}
+	@RequestMapping("wonWeeklyPro")
+	public String wonWeeklyPro() {
+		return "content/wonWeeklyPro";
 	}
 }

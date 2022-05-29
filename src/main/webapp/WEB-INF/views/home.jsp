@@ -61,12 +61,12 @@
 						<div class="tab-content">
 							<!-- 일간 컨텐츠 -->
 							<div class="tab-pane container ${wonOpt==0?'active':'fade'}" id="cdaily"><br/>
-								<jsp:include page="content/won_day.jsp"/>
+								<jsp:include page="${request.contextPath}/content/wonDaily"/>
 							</div>
 							
 							<!-- 주간 컨텐츠 -->
 							<div class="tab-pane container ${wonOpt!=0?'active':'fade'}" id="cweekly"><br/>
-								<jsp:include page="content/won_week.jsp"/>
+								<jsp:include page="${request.contextPath}/content/wonWeekly"/>
 							</div>
 						</div>
 					</div>
