@@ -51,7 +51,8 @@
 	</select>
 	
 	<update id="update" parameterType="com.loa.model.WonDailyDTO">
-		update won_daily set
+		update won_daily 
+			<set>
 				reg=sysdate,
 				island=#{island},
 				bitan=#{bitan},
@@ -61,7 +62,14 @@
 				ghostShip=#{ghostShip},
 				rowen=#{rowen},
 				thulubik=#{thulubik},
-				npcValue=#{npcValue}
+				npcValue=#{npcValue},
+				<if test="npc1 != null">npc1 = #{npc1},</if>
+				<if test="npc2 != null">npc2 = #{npc2},</if>
+				<if test="npc3 != null">npc3 = #{npc3},</if>
+				<if test="npc4 != null">npc4 = #{npc4},</if>
+				<if test="npc5 != null">npc5 = #{npc5},</if>
+				<if test="npc6 != null">npc6 = #{npc6}</if>
+			</set>
 	</update>
 </mapper>
 

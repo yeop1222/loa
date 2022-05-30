@@ -126,6 +126,7 @@ public class ContentController {
 	@RequestMapping("wonDailyPro")
 	public String wonDailyPro(Model model, WonDailyDTO dto,
 								 String charOpt, String charOpt2) {
+		System.out.println(dto);
 		
 		wds.update(dto);
 		

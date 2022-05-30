@@ -60,7 +60,7 @@
 		</tr>
 		<c:forEach var="i" begin="0" end="${npcList.size()-1 }">
 			<c:set var="dto" value="${npcList[i]}" />
-			<input type="hidden" name="npc${i}" value="${dto.name}"/>
+			<input type="hidden" name="npc${i+1}" value="${dto.name}"/>
 			<tr>
 				<td class="align-middle" >
 					&nbsp;&nbsp;&nbsp;${dto.name}
