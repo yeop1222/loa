@@ -1,6 +1,5 @@
 package com.loa.service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -80,13 +79,13 @@ public class WonDailyServiceImpl implements WonDailyService {
 			
 			
 			//레코드 초기화
-			// TODO mapper.initDayZero();
+			mapper.initDayZero();
 		}
 				
 		//주차이 1이상이면 레코드 초기화(유령선, 로웬, 툴루비크)
 		if(weekGap>0) {
 			//레코드 초기화
-			// TODO mapper.initWeekZero();
+			mapper.initWeekZero();
 		}
 	}
 
@@ -98,6 +97,11 @@ public class WonDailyServiceImpl implements WonDailyService {
 	@Override
 	public List<NpcDTO> npcList(){
 		return mapper.npcList();
+	}
+	
+	@Override
+	public void update(WonDailyDTO dto) {
+		mapper.update(dto);
 	}
 }
 

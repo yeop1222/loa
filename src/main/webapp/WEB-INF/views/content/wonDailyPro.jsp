@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-${dto}
+<c:redirect url="/?charOpt=${charOpt}&charOpt2=${charOpt2}&wonOpt=${wonOpt}"/>

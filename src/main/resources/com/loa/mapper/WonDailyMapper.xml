@@ -50,6 +50,19 @@
 		select * from npc where sedo>0
 	</select>
 	
+	<update id="update" parameterType="com.loa.model.WonDailyDTO">
+		update won_daily set
+				reg=sysdate,
+				island=#{island},
+				bitan=#{bitan},
+				chaosGate=#{chaosGate},
+				boss=#{boss},
+				pkIsland=#{pkIsland},
+				ghostShip=#{ghostShip},
+				rowen=#{rowen},
+				thulubik=#{thulubik},
+				npcValue=#{npcValue}
+	</update>
 </mapper>
 
 

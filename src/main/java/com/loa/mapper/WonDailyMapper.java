@@ -14,5 +14,5 @@ public interface WonDailyMapper {
 	public void initDayZero();
 	public void initWeekZero();
 	public List<NpcDTO> npcList();
-	
+	public void update(WonDailyDTO dto);
 }

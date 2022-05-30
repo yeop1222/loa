@@ -12,4 +12,6 @@ public interface WonDailyService {
 	public WonDailyDTO info();
 	//호감작 중인 npc이름 리스트
 	public List<NpcDTO> npcList();
+	//submit눌렀을때 db에 업데이트
+	public void update(WonDailyDTO dto);
 }

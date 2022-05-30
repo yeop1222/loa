@@ -1,6 +1,5 @@
 package com.loa.controller;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.loa.model.CharDailyDTO;
-import com.loa.model.NpcDTO;
 import com.loa.model.WonDailyDTO;
 import com.loa.service.CharDailyService;
 import com.loa.service.CharService;
@@ -126,9 +124,21 @@ public class ContentController {
 		return "content/wonDaily";
 	}
 	@RequestMapping("wonDailyPro")
-	public String wonDailyPro(Model model, WonDailyDTO dto) {
+	public String wonDailyPro(Model model, WonDailyDTO dto,
+								 String charOpt, String charOpt2) {
 		
-		model.addAttribute("dto", dto);
+		wds.update(dto);
+		
+		//페이지탭 옵션
+		if(charOpt==null) {
+			charOpt="1";
+		}
+		if(charOpt2==null) {
+			charOpt2="1";
+		}
+		model.addAttribute("wonOpt", 0);
+		model.addAttribute("charOpt2", charOpt2);
+		model.addAttribute("charOpt", charOpt);
 		
 		return "content/wonDailyPro";
 	}

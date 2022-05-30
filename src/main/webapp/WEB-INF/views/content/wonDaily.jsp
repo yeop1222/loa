@@ -23,7 +23,7 @@
 				<td class="align-middle" colspan="2">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="islands" value="2"/>
+							<input type="checkbox" class="form-check-input" name="islands" value="2" ${co.island>=2?"checked":"" }/>
 							모험의섬(주말)
 						</label>
 					</div>
@@ -32,7 +32,7 @@
 			<td class="align-middle" colspan="${day==0||day==6?2:4}">
 				<div class="form-check-inline">
 					<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="islands" value="1"/>
+						<input type="checkbox" class="form-check-input" name="islands" value="1" ${co.island%2==1?"checked":"" }/>
 						모험의섬
 					</label>
 				</div>
@@ -45,7 +45,7 @@
 			<td class="align-middle" colspan="4">
 				<div class="form-check-inline">
 					<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="bitan" value="1"/>
+						<input type="checkbox" class="form-check-input" name="bitan" value="1" ${co.bitan==1? "checked":"" }/>
 						비탄의 섬
 					</label>
 				</div>
@@ -69,7 +69,8 @@
 					<c:if test="${dto.song1 != null}">
 						<div class="form-check-inline">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="8"/>
+								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="8"
+									${co.npcValue % Math.pow(2,4*i+4) / Math.pow(2,4*i+3) >=1 && co.npcValue % Math.pow(2,4*i+4) / Math.pow(2,4*i+3) <=2 ? "checked":""}/>
 							</label>
 						</div>
 					</c:if>
@@ -78,7 +79,8 @@
 					<c:if test="${dto.song2 != null}">
 						<div class="form-check-inline">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="4"/>
+								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="4"
+									${co.npcValue % Math.pow(2,4*i+3) / Math.pow(2,4*i+2) >=1 && co.npcValue % Math.pow(2,4*i+3) / Math.pow(2,4*i+2) <=2 ? "checked":""}/>
 							</label>
 						</div>
 					</c:if>
@@ -87,7 +89,8 @@
 					<c:if test="${dto.emote1 != null}">
 						<div class="form-check-inline">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="2"/>
+								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="2"
+									${co.npcValue % Math.pow(2,4*i+2) / Math.pow(2,4*i+1) >=1 && co.npcValue % Math.pow(2,4*i+2) / Math.pow(2,4*i+1) <=2 ? "checked":""}/>
 							</label>
 						</div>
 					</c:if>
@@ -96,7 +99,8 @@
 					<c:if test="${dto.emote2 != null}">
 						<div class="form-check-inline">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="1"/>
+								<input type="checkbox" class="form-check-input" name='${"npcv" += i}' value="1"
+									${co.npcValue % Math.pow(2,4*i+1) / Math.pow(2,4*i) >=1 && co.npcValue % Math.pow(2,4*i+1) / Math.pow(2,4*i) <=2 ? "checked":""}/>
 							</label>
 						</div>
 					</c:if>
@@ -113,7 +117,7 @@
 				<td class="align-middle" colspan="4">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="chaosGate" value="1"/>
+							<input type="checkbox" class="form-check-input" name="chaosGate" value="1" ${co.chaosGate==1?"checked":"" }/>
 							카오스게이트
 						</label>
 					</div>
@@ -128,7 +132,7 @@
 				<td class="align-middle" colspan="4">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="boss" value="1"/>
+							<input type="checkbox" class="form-check-input" name="boss" value="1" ${co.boss==1?"checked":"" }/>
 							필드보스
 						</label>
 					</div>
@@ -143,7 +147,7 @@
 				<td class="align-middle" colspan="4">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="pkIsland" value="1"/>
+							<input type="checkbox" class="form-check-input" name="pkIsland" value="1" ${co.pkIsland==1?"checked":"" }/>
 							점령전
 						</label>
 					</div>
@@ -158,7 +162,7 @@
 				<td class="align-middle" colspan="4">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="ghostShip" value="1"/>
+							<input type="checkbox" class="form-check-input" name="ghostShip" value="1" ${co.ghostShip==1?"checked":"" }/>
 							유령선
 						</label>
 					</div>
@@ -173,7 +177,7 @@
 				<td class="align-middle" colspan="${day==6?2:4 }">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="rowens" value="1"/>
+							<input type="checkbox" class="form-check-input" name="rowens" value="1" ${co.rowen%2==1?"checked":"" }/>
 							<c:if test="${day==6 }">
 								로웬 15:30
 							</c:if>
@@ -187,7 +191,7 @@
 					<td class="align-middle" colspan="2">
 						<div class="form-check-inline">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" name="rowens" value="2"/>
+								<input type="checkbox" class="form-check-input" name="rowens" value="2" ${co.rowen>=2?"checked":"" }/>
 								로웬 22:30
 							</label>
 						</div>
@@ -203,7 +207,7 @@
 				<td class="align-middle" colspan="4">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="thulubik" value="1"/>
+							<input type="checkbox" class="form-check-input" name="thulubik" value="1" ${co.thulubik==1?"checked":"" }/>
 							툴루비크 전장
 						</label>
 					</div>
@@ -219,22 +223,62 @@
 	<input type="hidden" name="island" value="0"/>
 	<input type="hidden" name="npcValue" value="0"/>
 	<input type="hidden" name="rowen" value="0"/>
+	<input type="hidden" name="charOpt" value="${charOpt }"/>
+	<input type="hidden" name="charOpt2" value="${charOpt2 }"/>
 </form>
 
 
+
+<c:if test="${day==0 || day==6}">
+	<c:if test="${co.island >= 2}">
+		<script>
+			document.frmwd.islands[0].checked = true;
+		</script>
+	</c:if>
+	<c:if test="${co.island%2==1}">
+		<script>
+			document.frmwd.islands[1].checked = true;
+			</script>
+	</c:if>
+</c:if>
+<c:if test="${day==6}">
+	<c:if test="${co.rowen>=2}">
+		<script>
+			document.frmwd.rowens[1].checked = true;
+		</script>
+	</c:if>
+	<c:if test="${co.rowen%2==1}">
+		<script>
+			document.frmwd.rowens[0].checked = true;
+		</script>
+	</c:if>
+</c:if>
+
+
+
+
+
 <script>
+
+
 	function setSubmit(form){
 		
 		//모험의섬
-		for(var i=0; i<form.islands.length; i++){
-			form.island.value = form.island.value*1+form.islands[i].checked*form.islands[i].value*1;
+		if(${day==0 || day==6}){
+			for(var i=0; i<form.islands.length; i++){
+				form.island.value = form.island.value*1+form.islands[i].checked*form.islands[i].value*1;
+			}
+		}else{
+			form.island.value = form.islands.value;
 		}
 		
 		//로웬은 토요일만 두개
-		if(${day==1 || day==4 || day==6}){
+		if(${day==6}){
 			for(var i=0; i<form.rowens.length; i++){
 				form.rowen.value = form.rowen.value*1+form.rowens[i].checked*form.rowens[i].value*1;
 			}
+		}else if(${day==1 || day==4}){
+			form.rowen.value = form.rowens.value;
 		}
 		
 		//npc
