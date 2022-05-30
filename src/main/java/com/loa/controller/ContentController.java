@@ -1,5 +1,6 @@
 package com.loa.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,10 @@ public class ContentController {
 		//dto보내기
 		model.addAttribute("co", wds.info());
 		//요일정보 보내기
-		model.addAttribute("day", new Date().getDay());
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR_OF_DAY, -6);
+		int day = cal.get(Calendar.DAY_OF_WEEK)-1;
+		model.addAttribute("day", day);
 		//npc리스트 보내기
 		model.addAttribute("npcList", wds.npcList());
 		
@@ -126,7 +130,6 @@ public class ContentController {
 	@RequestMapping("wonDailyPro")
 	public String wonDailyPro(Model model, WonDailyDTO dto,
 								 String charOpt, String charOpt2) {
-		System.out.println(dto);
 		
 		wds.update(dto);
 		

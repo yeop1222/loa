@@ -33,7 +33,7 @@
 				<div class="form-check-inline">
 					<label class="form-check-label">
 						<input type="checkbox" class="form-check-input" name="islands" value="1" ${co.island%2==1?"checked":"" }/>
-						모험의섬
+						모험의 섬
 					</label>
 				</div>
 			</td>
@@ -229,35 +229,6 @@
 
 
 
-<c:if test="${day==0 || day==6}">
-	<c:if test="${co.island >= 2}">
-		<script>
-			document.frmwd.islands[0].checked = true;
-		</script>
-	</c:if>
-	<c:if test="${co.island%2==1}">
-		<script>
-			document.frmwd.islands[1].checked = true;
-			</script>
-	</c:if>
-</c:if>
-<c:if test="${day==6}">
-	<c:if test="${co.rowen>=2}">
-		<script>
-			document.frmwd.rowens[1].checked = true;
-		</script>
-	</c:if>
-	<c:if test="${co.rowen%2==1}">
-		<script>
-			document.frmwd.rowens[0].checked = true;
-		</script>
-	</c:if>
-</c:if>
-
-
-
-
-
 <script>
 
 
@@ -269,7 +240,7 @@
 				form.island.value = form.island.value*1+form.islands[i].checked*form.islands[i].value*1;
 			}
 		}else{
-			form.island.value = form.islands.value;
+			form.island.value = form.islands.value*1*form.islands.checked;
 		}
 		
 		//로웬은 토요일만 두개
@@ -278,7 +249,7 @@
 				form.rowen.value = form.rowen.value*1+form.rowens[i].checked*form.rowens[i].value*1;
 			}
 		}else if(${day==1 || day==4}){
-			form.rowen.value = form.rowens.value;
+			form.rowen.value = form.rowens.value*1*form.rowens.checked;
 		}
 		
 		//npc
