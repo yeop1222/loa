@@ -177,7 +177,7 @@
 				<td class="align-middle" colspan="${day==6?2:4 }">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="rowens" value="1" ${co.rowen%2==1?"checked":"" }/>
+							<input type="checkbox" class="form-check-input" name="rowens" value="1" ${co.rowen%2>=2?"checked":"" }/>
 							<c:if test="${day==6 }">
 								로웬 15:30
 							</c:if>
@@ -191,7 +191,7 @@
 					<td class="align-middle" colspan="2">
 						<div class="form-check-inline">
 							<label class="form-check-label">
-								<input type="checkbox" class="form-check-input" name="rowens" value="2" ${co.rowen>=2?"checked":"" }/>
+								<input type="checkbox" class="form-check-input" name="rowens" value="1" ${co.rowen>=2?"checked":"" }/>
 								로웬 22:30
 							</label>
 						</div>
@@ -246,7 +246,7 @@
 		//로웬은 토요일만 두개
 		if(${day==6}){
 			for(var i=0; i<form.rowens.length; i++){
-				form.rowen.value = form.rowen.value*1+form.rowens[i].checked*form.rowens[i].value*1;
+				form.rowen.value = form.rowen.value*1+form.rowens[i].checked*1;
 			}
 		}else if(${day==1 || day==4}){
 			form.rowen.value = form.rowens.value*1*form.rowens.checked;

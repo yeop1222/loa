@@ -10,27 +10,20 @@
 	
 	<update id="npcUpdate">
 		update npc set currscore=currscore
-			<if test="value &amp; 0x8 != 0">
-				+(select score from song where name=
-				(select song1 from npc where name=#{npcName}))
-			</if>
-			<if test="value &amp; 0x4 != 0">
-				+(select score from song where name=
-				(select song2 from npc where name=#{npcName}))
-			</if>
-			<if test="value &amp; 0x2 != 0">
-				+(select emote from song where name=
-				(select emote1 from npc where name=#{npcName}))
-			</if>
-			<if test="value &amp; 0x1 != 0">
-				+(select emote from song where name=
-				(select emote2 from npc where name=#{npcName}))
-			</if>
+			+nvl((decode(bitand(#{value},8),8,1,0))*(select score from song where name=
+			(select song1 from npc where name=#{npcName})),0)
+			+nvl((decode(bitand(#{value},4),4,1,0))*(select score from song where name=
+			(select song2 from npc where name=#{npcName})),0)
+			+nvl((decode(bitand(#{value},2),2,1,0))*(select score from emote where name=
+			(select emote1 from npc where name=#{npcName})),0)
+			+nvl((decode(bitand(#{value},1),1,1,0))*(select score from emote where name=
+			(select emote2 from npc where name=#{npcName})),0)
 		where name=#{npcName}
 	</update>
 
 	<update id="initDayZero">
 		update won_daily set 
+			reg=sysdate,
 			island = 0,
 			bitan=0,
 			chaosGate=0,
@@ -41,6 +34,7 @@
 	
 	<update id="initWeekZero">
 		update won_daily set
+			reg=sysdate,
 			ghostShip=0,
 			rowen=0,
 			thulubik=0
@@ -60,7 +54,7 @@
 				boss=#{boss},
 				pkIsland=#{pkIsland},
 				ghostShip=#{ghostShip},
-				rowen=#{rowen},
+				rowen=rowen+#{rowen},
 				thulubik=#{thulubik},
 				npcValue=#{npcValue},
 				<if test="npc1 != null">npc1 = #{npc1},</if>
