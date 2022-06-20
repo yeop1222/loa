@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.loa.mapper.CharWeeklyMapper">
+	
+	<select id="getCharWeekly" resultType="com.loa.model.CharWeeklyDTO">
+		select * from char_weekly where charName=#{charName}
+	</select>
+	
+	<select id="getLev" resultType="double">
+		select lev from charic where name=#{charName}
+	</select>
+	
+	<update id="initWeekZero">
+		update char_weekly set
+			reg=sysdate,
+			epona=0,
+			oreha=0,
+			kayangel=0,
+			argos=0,
+			gun1=0,
+			gun2=0,
+			gun3=0
+		where charName=#{charName}
+	</update>
+	
+	<update id="update">
+		update char_weekly set
+			reg=sysdate,
+			epona=#{epona},
+			oreha=#{oreha},
+			kayangel=#{kayangel},
+			argos=#{argos},
+			gun1=#{gun1},
+			gun2=#{gun2},
+			gun3=#{gun3},
+			gun4=#{gun4}
+		where charName=#{charName}
+	</update>
+	
+	<select id="getValid" resultType="com.loa.model.CharWeeklyDTO">
+		select * from char_weekly
+			where charName not in (#{charName})
+	</select>
+	
+</mapper>

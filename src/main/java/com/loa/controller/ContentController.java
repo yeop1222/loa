@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.loa.model.CharDailyDTO;
+import com.loa.model.CharWeeklyDTO;
 import com.loa.model.WonDailyDTO;
 import com.loa.service.CharDailyService;
 import com.loa.service.CharService;
+import com.loa.service.CharWeeklyService;
 import com.loa.service.EponaService;
 import com.loa.service.WonDailyService;
 
@@ -27,7 +29,10 @@ public class ContentController {
 	private EponaService es;
 	@Autowired
 	private WonDailyService wds;
+	@Autowired
+	private CharWeeklyService cws;
 	
+	/***********************캐릭터 일일 컨텐츠************************/
 	@RequestMapping("/charDaily")
 	public String charDaily(String wonOpt, String charOpt2, String name, Model model) {
 		//페이지탭 옵션
@@ -92,15 +97,56 @@ public class ContentController {
 		return "content/charDailyPro";
 	}
 
-	@RequestMapping("charWeekly")
-	public String charWeekly(Model model, String name2) {
+	/***********************캐릭터 주간 컨텐츠************************/
+	@RequestMapping("/charWeekly")
+	public String charWeekly(Model model, String name2, String charOpt, String wonOpt) {
+		
 		model.addAttribute("name", name2);
+		//페이지탭 옵션
+		if(charOpt==null) {
+			charOpt="1";
+		}
+		if(wonOpt==null) {
+			wonOpt="0";
+		}
+		model.addAttribute("charOpt", charOpt);
+		model.addAttribute("wonOpt", wonOpt);
+		
+		//초기화
+		cws.init(name2);
+		model.addAttribute("co", cws.info(name2));
+		model.addAttribute("ch", cs.info(name2));
+		
+		
 		return "content/charWeekly";
 	}
-	@RequestMapping("charWeeklyPro")
-	public String charWeeklyPro() {
+	@RequestMapping("/charWeeklyPro")
+	public String charWeeklyPro(Model model, String charOpt, String charOpt2, String wonOpt, CharWeeklyDTO dto) {
+
+		//페이지탭 옵션
+		if(charOpt==null) {
+			charOpt="1";
+		}
+		if(charOpt2==null) {
+			charOpt2="1";
+		}
+		if(wonOpt==null) {
+			wonOpt="0";
+		}
+		model.addAttribute("charOpt", charOpt);
+		model.addAttribute("charOpt2", charOpt2);
+		model.addAttribute("wonOpt", wonOpt);
+		
+		
+		model.addAttribute("error", !cws.update(dto));
+		
+		model.addAttribute("dto", dto);
+		
 		return "content/charWeeklyPro";
 	}
+	
+	
+	/***********************원정대 일일 컨텐츠************************/
 	@RequestMapping("wonDaily")
 	public String wonDaily(Model model, String charOpt, String charOpt2) {
 		//페이지탭 옵션
@@ -127,6 +173,7 @@ public class ContentController {
 		
 		return "content/wonDaily";
 	}
+	
 	@RequestMapping("wonDailyPro")
 	public String wonDailyPro(Model model, WonDailyDTO dto,
 								 String charOpt, String charOpt2) {
@@ -146,8 +193,12 @@ public class ContentController {
 		
 		return "content/wonDailyPro";
 	}
+	
+	/***********************원정대 주간 컨텐츠************************/
 	@RequestMapping("wonWeekly")
-	public String wonWeekly() {
+	public String wonWeekly(Model model, String charOpt, String charOpt2) {
+		
+				
 		return "content/wonWeekly";
 	}
 	@RequestMapping("wonWeeklyPro")

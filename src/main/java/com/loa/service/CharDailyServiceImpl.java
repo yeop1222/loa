@@ -33,8 +33,9 @@ public class CharDailyServiceImpl implements CharDailyService {
 			dateGap++;
 		}
 		//날짜차이 더함
-		dateGap += (int)((currDate.getTime()-saveDate.getTime())/86400000);
-		
+		Date date1 = new Date(currDate.getYear(),currDate.getMonth(),currDate.getDate());
+		Date date2 = new Date(saveDate.getYear(),saveDate.getMonth(),saveDate.getDate());
+		dateGap += (int)((date1.getTime()-date2.getTime())/86400000);
 		//날짜차이 1이상이면 해당 레코드 초기화하고 각 테이블(에포나,캐릭터 휴식게이지)에 값 저장
 		if(dateGap > 0) {
 			//에포나 증가

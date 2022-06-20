@@ -44,14 +44,15 @@ public class WonDailyServiceImpl implements WonDailyService {
 			weekGap++;
 		}
 		//날짜차이 더함
-		dateGap += (int)((currDate.getTime()-saveDate.getTime())/86400000);
+		Date date1 = new Date(currDate.getYear(),currDate.getMonth(),currDate.getDate());
+		Date date2 = new Date(saveDate.getYear(),saveDate.getMonth(),saveDate.getDate());
+		dateGap += (int)((date1.getTime()-date2.getTime())/86400000);
 		//주 차이 더함
-		weekGap += (int)((currDate.getTime()-saveDate.getTime())/(86400000L*7));
+		weekGap += (int)((date1.getTime()-date2.getTime())/(86400000L*7));
 		
 		//날짜차이 1이상이면 레코드 초기화(모험섬, 비탄, 카게, 보스, pk섬, 호감도)하고
 		//호감도 테이블 업데이트
 		if(dateGap > 0) {
-			// TODO 호감도 증가하는지 확인
 			if(dto.getNpc1() != null) {
 				int value = dto.getNpcValue() & 0xf;
 				mapper.npcUpdate(dto.getNpc1(), value);
